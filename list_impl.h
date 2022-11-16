@@ -4,7 +4,6 @@
 
 #include "list.h"
 #include "logger.h"
-#include "graph.h"
 
 static const size_t default_cap_  = 16;
 static const size_t growth_coeff_ = 2;
