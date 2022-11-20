@@ -305,7 +305,7 @@ static void try_grow_list(compact_list* list)
 static void resize_list(compact_list* list, size_t new_size)
 {
     size_t old_size = list->capacity;
-    list->nodes = (node*) reallocarray(list->nodes, new_size, sizeof(list->nodes));
+    list->nodes = (node*) reallocarray(list->nodes, new_size, sizeof(*list->nodes));
     list->capacity = new_size;
 
     for (size_t i = old_size; i < new_size; i++)
@@ -318,13 +318,13 @@ static void resize_list(compact_list* list, size_t new_size)
 
     list_iterator lst_free = list->free;    
 
+    if (!list->free)
+        list->free = old_size;
+
     list_iterator nxt = 0;
     while((nxt = next_element(list, lst_free)))
         lst_free = nxt;
-    if (old_size > new_size)
-        list->nodes[lst_free].next = 0;
-    else
-        list->nodes[lst_free].next = old_size;
+    list->nodes[lst_free].next = 0;
 }
 
 static void memswap(void* mem1, void* mem2, size_t mem_size)
