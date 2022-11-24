@@ -153,9 +153,9 @@ list_iterator push_front(compact_list* list, element_t value);
  * 
  * @param[in] list `compact_list` instance
  * @param[in] iterator Iterator to list element
- * @return Element value
+ * @return Element pointer
  */
-element_t get_element(const compact_list* list, const list_iterator iterator);
+element_t* get_element(const compact_list* list, const list_iterator iterator);
 
 /**
  * @brief Erase element from list

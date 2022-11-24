@@ -143,13 +143,13 @@ list_iterator push_front(compact_list* list, element_t value)
     return insert_before(list, list_begin(list), value);
 }
 
-element_t get_element(const compact_list* list, const list_iterator iterator)
+element_t* get_element(const compact_list* list, const list_iterator iterator)
 {
-    LOG_ASSERT(iterator != 0, return POISON);
-    LOG_ASSERT(list != NULL, return POISON);
-    LOG_ASSERT(list->nodes != NULL, return POISON);
+    LOG_ASSERT(iterator != 0, return NULL);
+    LOG_ASSERT(list != NULL, return NULL);
+    LOG_ASSERT(list->nodes != NULL, return NULL);
 
-    return list->nodes[iterator].value;
+    return &list->nodes[iterator].value;
 }
 
 void erase_element(compact_list* list, list_iterator iterator)
